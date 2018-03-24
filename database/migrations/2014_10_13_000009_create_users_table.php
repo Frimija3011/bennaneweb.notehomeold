@@ -12,6 +12,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -21,11 +22,12 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        
         DB::table('users')->insert(
             [
                 'name' => 'Lam3allam',
                 'email' => 'aziz44000@yahoo.fr',
-                'password' => bcrypt('lAM3allam44980'),
+                'password' => bcrypt('password'),
                 'admin' => 1
             ]
         );  
