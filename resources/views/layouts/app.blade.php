@@ -80,7 +80,7 @@
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">Courses</span>
-                                    <span class="info-box-number">2 <small>notes</small></span>
+                                    <span class="info-box-number">{{ $nbCourses }} <small>note{{ $nbCourses > 1 ? 's' : ''}}</small></span>
                                 </div>
                               <!-- /.info-box-content -->
                             </div>

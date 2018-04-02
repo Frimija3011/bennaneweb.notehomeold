@@ -35,7 +35,7 @@
         <div class="login-box">
 
             <div class="login-logo">
-                <a href="{{ route('home') }}"><b>Note</b>Home</a>
+                <a href="{{ route('home') }}"><b>Notehome</b></a>
             </div>
             
             <div class="login-box-body">
@@ -73,17 +73,17 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-xs-8">
+                        <div class="col-xs-12">
                             <label>
                                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Rester connecté') }}
                             </label>                          
                         </div>
-                        <div class="col-xs-4">
-                          <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-sign-in"></i> Connexion</button>
                         </div>
                     </div>
                     
-                </form>      
+                </form>
 
             </div>
 

@@ -14,7 +14,7 @@ class CreatePartagesTable extends Migration
     public function up()
     {
         Schema::create('partages', function (Blueprint $table) {
-            $table->increments('id_partages');
+            $table->increments('id');
             $table->integer('user_id');
             $table->integer('note_id');
             $table->softDeletes();

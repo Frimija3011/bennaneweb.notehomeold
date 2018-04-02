@@ -14,12 +14,19 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function(Blueprint $table) {
-            $table->increments('id_notes');
-            $table->string('titre_notes');
-            $table->text('contenu_notes');
-            $table->tinyInteger('categorie_notes');
-            $table->integer('user_id');
-            $table->tinyInteger('etat_notes');
+            
+            $table->increments('id');
+            
+            $table->string('titre');
+            $table->text('contenu');
+            $table->integer('categorie_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->tinyInteger('etat');
+            
+            // F.K
+            $table->foreign('categorie_id')->references('id')->on('categories');
+            $table->foreign('user_id')->references('id')->on('users');
+            
             $table->timestamps();         
             $table->softDeletes();
         });
