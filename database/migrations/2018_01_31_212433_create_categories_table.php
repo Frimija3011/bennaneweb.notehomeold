@@ -23,10 +23,10 @@ class CreateCategoriesTable extends Migration
         
         DB::table('categories')->insert(
             array(
-                ['titre' => 'Courses', 'couleur' => 'palegoldenrod', 'icone' => 'fa-shopping-cart'],                
-                ['titre' => 'Tâches', 'couleur' => '#c1e2b3', 'icone' => 'fa-tasks'],
-                ['titre' => 'Enfants', 'couleur' => '#f2dede', 'icone' => 'fa-edit'],
-                ['titre' => 'Voitures', 'couleur' => '#eee', 'icone' => 'fa-car']                
+                ['titre' => 'Courses', 'couleur' => 'bg-yellow', 'icone' => 'fa-shopping-cart'],                
+                ['titre' => 'Tâches', 'couleur' => 'bg-green', 'icone' => 'fa-tasks'],
+                ['titre' => 'Enfants', 'couleur' => 'bg-red', 'icone' => 'fa-child'],
+                ['titre' => 'Voitures', 'couleur' => 'bg-aqua', 'icone' => 'fa-car']                
             )
         );
     }
