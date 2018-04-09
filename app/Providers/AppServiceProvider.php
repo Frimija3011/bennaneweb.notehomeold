@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Note;
 use App\Models\Category;
+use App\Models\Outils\Outils;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
             $category->number = $nbCategory; 
+            $category->route = 'all-' . Outils::slugify($category->titre);
         }
         
         view()->composer('layouts.app', function ($view) {

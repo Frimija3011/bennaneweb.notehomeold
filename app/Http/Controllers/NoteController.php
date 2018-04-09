@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Partage;
+use App\Models\Note;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\NoteRepository;
 use App\Repositories\CategoryRepository;
-
-use App\Http\Requests;
 
 class NoteController extends Controller
 {
@@ -23,7 +22,25 @@ class NoteController extends Controller
     
     public function listByCourses() {
         
-        $data = $this->noteRepository->getPaginate(4);        
+        $data = array();
+        
+        $data['all_notes'] = Note::with('categorie')->where('categorie_id', 1)->get();    
+        
+        $data['categories'] = Category::all();    
+        
+        $data['category'] = Category::find(1);
+        
+        foreach ($data['categories'] as $category) {
+            $nbCategory = 0;
+            foreach ($data['all_notes'] as $note) {
+                if ($note->categorie->id == $category->id) {
+                    $nbCategory++;
+                }
+            }
+            $category->number = $nbCategory; 
+        }
+        
+        /*$data = $this->noteRepository->getPaginate(4);        
         $data['categories'] = $this->categoryRepository->getAll();        
         $data['notes'] = $this->noteRepository->getAll(1);
         
@@ -57,18 +74,23 @@ class NoteController extends Controller
         
         $data['icones'] = $array1;
         $data['links'] = $array2;
-        $data['partages'] = $array3;
+        $data['partages'] = $array3;*/
         
-        return view('notes/index', $data );
+        return view('notes/index', $data);
     }
     
-    public function detailNoteCourses($id) {
+    public function detailCourse($id) {
         $note = DB::table('notes')->where('id_note', $id)->first(); 
         $data['note'] = $note;        
-        return view('notes/detail', $data);
+        return view('notes/edit', $data);
     }
     
-    public function updateCourseNote(Request $request, $id) {
+    public function newCourse(Request $request) {
+        $data = [ ];
+        return view('notes/edit', $data);
+    } 
+    
+    public function updateCourse(Request $request, $id) {
         
         $editor = $request->input('example');
         $id_note = $id;

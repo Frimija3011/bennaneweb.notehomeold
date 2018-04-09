@@ -8,18 +8,18 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ asset('/assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
         <!-- Ionicons -->
-        <link rel="stylesheet" href="assets/bower_components/Ionicons/css/ionicons.min.css">
+        <link rel="stylesheet" href="{{ asset('/assets/bower_components/Ionicons/css/ionicons.min.css') }}">
         <!-- jvectormap -->
-        <link rel="stylesheet" href="assets/bower_components/jvectormap/jquery-jvectormap.css">
+        <link rel="stylesheet" href="{{ asset('/assets/bower_components/jvectormap/jquery-jvectormap.css') }}">
         <!-- Theme style -->
-        <link rel="stylesheet" href="assets/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="{{ asset('/assets/dist/css/AdminLTE.min.css') }}">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="assets/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="{{ asset('/assets/dist/css/skins/_all-skins.min.css') }}">
         <!-- Fa-awesome -->        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -40,11 +40,10 @@
         <div class="wrapper">
 
             <header class="main-header">
-
-                <a href="index2.html" class="logo">            
-                    <span class="logo-mini"><b>N</b>H</span>
-
-                    <span class="logo-lg"><b>Note</b>Home</span>
+                                
+                <a href="{{ route('home') }}" class="logo">                                                 
+                    <span class="logo-mini"><i class="fa fa-edit"></i> <b>N</b>H</span>
+                    <span class="logo-lg"><i class="fa fa-edit"></i> <b>Note</b>Home</span>
                 </a>
 
                 @include ('layouts.navbar')
@@ -79,14 +78,16 @@
                             @foreach($categories as $category)
                             
                                 <div class="col-md-3 col-sm-6 col-xs-12">
-                                    <div class="info-box">
-                                        <span class="info-box-icon {{ $category->couleur }}"><i class="fa {{ $category->icone }}"></i></span>
+                                    <a href="{{ route($category->route) }}">
+                                        <div class="info-box">
+                                            <span class="info-box-icon {{ $category->couleur }}"><i class="fa {{ $category->icone }}"></i></span>
 
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">{{ $category->titre }}</span>
-                                            <span class="info-box-number">{{ $category->number }} <small>note{{ $category->number > 1 ? 's' : ''}}</small></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{ $category->titre }}</span>
+                                                <span class="info-box-number">{{ $category->number }} <small>note{{ $category->number > 1 ? 's' : ''}}</small></span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             
                             @endforeach
@@ -99,95 +100,7 @@
                         
                         <div class="col-md-12">
 
-                            <div class="box box-info">
-                                
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Dernières notes</h3>
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body">
-                                    <div class="table-responsive">
-                                        <table class="table no-margin">
-                                            <thead>
-                                                <tr>
-                                                    <th>Order ID</th>
-                                                    <th>Item</th>
-                                                    <th>Status</th>
-                                                    <th>Popularity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="label label-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="label label-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="label label-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="label label-info">Processing</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="label label-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="label label-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="label label-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="box-footer clearfix">
-                                      <a href="javascript:void(0)" class="btn btn-sm btn-bitbucket btn-flat pull-left">Nouvelle note</a>
-                                      <a href="javascript:void(0)" class="btn btn-sm btn-bitbucket btn-flat pull-right">Voir toutes les notes</a>
-                                </div>
-                              
-                            </div>
+                            @yield ('content')
                             
                         </div>
                         
@@ -387,16 +300,16 @@
 
         </div>
 
-        <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="assets/bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="assets/bower_components/fastclick/lib/fastclick.js"></script>
-        <script type="text/javascript" src="assets/dist/js/adminlte.min.js"></script>
-        <script type="text/javascript" src="assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-        <script type="text/javascript" src="assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script type="text/javascript" src="assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-        <script type="text/javascript" src="assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script type="text/javascript" src="assets/bower_components/chart.js/Chart.js"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery/jquery-3.3.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/bower_components/chart.js/Chart.js') }}"></script>                
 <!--        <script type="text/javascript" src="assets/dist/js/pages/dashboard2.js"></script>
         <script type="text/javascript" src="assets/dist/js/demo.js"></script>-->
 
