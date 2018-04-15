@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use App\Models\Category;
+use App\Models\Partage;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\NoteRepository;
 use App\Repositories\CategoryRepository;
@@ -39,6 +41,18 @@ class NoteController extends Controller
             }
             $category->number = $nbCategory; 
         }
+        
+        $array3 = array();
+        $partages = Partage::all();
+        foreach ($data['all_notes'] as $note) {
+            foreach ($partages as $partage) {
+                if ($partage->note == $note->id_note) {
+                    array_push($array3, $note->id_note);
+                }
+            }
+        }
+        
+        $data['partages'] = $array3;
         
         /*$data = $this->noteRepository->getPaginate(4);        
         $data['categories'] = $this->categoryRepository->getAll();        
@@ -90,17 +104,32 @@ class NoteController extends Controller
         return view('notes/edit', $data);
     } 
     
-    public function updateCourse(Request $request, $id) {
+    public function updateCourse(Request $request) {
         
-        $editor = $request->input('example');
-        $id_note = $id;
+        $idNote = $request->input('idNote');
+        
+        // Nouvelle note
+        $note = new Note();
+        
+        if ($idNote > 0) {
+            // Modification
+            $note = Note::find($idNote);
+        }
+        $note->titre = $request->input('titreNote');
+        $note->contenu = $request->input('contenuNote');
+        $note->categorie_id = 1;
+        $note->user_id = Auth::user()->id;
+        $note->etat = 1;
+        $note->save();
+        
+        $editor = $request->input('example');        
                 
         DB::table('notes')
-            ->where('id_note', $id_note)
-            ->update(['contenu_note' => $editor]);
+            ->where('id', $idNote)
+            ->update(['contenu' => $editor]);
         
         DB::table('notes')
-            ->where('id_note', $id_note)
+            ->where('id', $idNote)
             ->update(['updated_at' => date('Y-m-d H:i:s')]);
         
         return redirect()->route('all-courses')->with('noteCoureUpdated', 'Note mise à jour avec succès');

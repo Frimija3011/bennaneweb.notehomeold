@@ -31,8 +31,8 @@ Route::group(['middleware' => 'web'], function () {
     // Courses
     Route::get('courses/all', 'NoteController@listByCourses')->name('all-courses');
     Route::get('courses/detail/{id}', 'NoteController@detailCourse')->name('detail-course');
-    Route::get('courses/nouvelle', 'NoteController@newCourse')->name('new-course');
-    Route::post('courses/edit/{id}', 'NoteController@editCourse')->name('update-course');    
+    Route::get('courses/nouvelle', 'NoteController@newCourse')->name('new-course');    
+    Route::post('courses/edit', 'NoteController@updateCourse')->name('update-course');    
     
     // Tâches    
     Route::get('taches/all', 'NoteController@listByTaches')->name('all-taches');
