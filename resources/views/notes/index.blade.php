@@ -16,6 +16,7 @@
         
         <div class="row"> 
             @if (sizeof($all_notes) > 0)
+            <a class="btn btn-warning" href="{{ route('new-course') }}" >Nouvelle note</a>
                 <table class="table">
                     <thead>
                       <tr>
@@ -27,14 +28,14 @@
                     <tbody style="background-color: {{ $category->couleur_category }}; color: black;">
                         @foreach ($all_notes as $note)
                             <tr>
-                                <input type="hidden" name="idNote" value="{{ $note->id_note }}" />
-                                <td><a href="{{ route('detail-course', ['id' => $note->id_note]) }}">{{ $note->titre_note }}</a></td>
+                                <input type="hidden" name="idNote" value="{{ $note->id }}" />
+                                <td><a href="{{ route('detail-course', ['id' => $note->id]) }}">{{ $note->titre }}</a></td>
                                 <td><median><i class="fa fa-calendar"></i> {{ $note->updated_at ? date('d/m/Y', strtotime($note->updated_at)) : 'Aucune' }} <i class="fa fa-clock-o"></i> 
                                     <strong>{{ $note->updated_at ? date('H:i', strtotime($note->updated_at)) : ' modification' }}</strong></median></td>
                                 <td>
                                   @foreach($partages as $partage)
-                                      @if ($partage == $note->id_note)
-                                          <span style="float: right; font-size: medium">
+                                      @if ($partage == $note->id)
+                                          <span style="font-size: medium">
                                               <i class="fa fa-users" style="font-size: medium"></i>
                                           </span>
                                       @endif

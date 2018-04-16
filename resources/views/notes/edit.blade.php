@@ -15,8 +15,8 @@
         
         <div class="row"> 
             <form id="newEditForm" action="{{ route('update-course') }}" method="post">
-                <input type="text" class="form-control" name="titreNote" id="titre" style="margin-bottom: 15px" placeholder="Titre de la note" />
-                <textarea class="" placeholder="Tapez votre contenu ici" id="areaNote" name="contenuNote"></textarea> 
+                <input type="text" class="form-control" name="titreNote" id="titre" style="margin-bottom: 15px" placeholder="Titre de la note" value="{{ isset($note) ? $note->titre : '' }}" />
+                <textarea class="" placeholder="Tapez votre contenu ici" id="areaNote" name="contenuNote">{{ isset($note) ? $note->contenu : '' }}</textarea> 
                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                 <input type="hidden" name="idNote" id="idNote" value="{{ isset($note) ? $note->id : 0 }}" />
                 <script>                

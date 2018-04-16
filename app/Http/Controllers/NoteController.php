@@ -46,12 +46,11 @@ class NoteController extends Controller
         $partages = Partage::all();
         foreach ($data['all_notes'] as $note) {
             foreach ($partages as $partage) {
-                if ($partage->note == $note->id_note) {
-                    array_push($array3, $note->id_note);
+                if ($partage->note_id == $note->id) {
+                    array_push($array3, $note->id);
                 }
             }
         }
-        
         $data['partages'] = $array3;
         
         /*$data = $this->noteRepository->getPaginate(4);        
@@ -93,9 +92,8 @@ class NoteController extends Controller
         return view('notes/index', $data);
     }
     
-    public function detailCourse($id) {
-        $note = DB::table('notes')->where('id_note', $id)->first(); 
-        $data['note'] = $note;        
+    public function detailCourse($id) {        
+        $data['note'] = DB::table('notes')->where('id', $id)->first(); 
         return view('notes/edit', $data);
     }
     
