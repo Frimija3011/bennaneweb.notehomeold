@@ -7,7 +7,7 @@
         
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-shopping-cart"></i> Courses</h3>
+            <h3 class="page-header"><i class="fa fa-shopping-cart"></i> Courses <a class="fa fa-plus-square btn-warning" href="{{ route('new-course') }}"></a></h3>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -15,8 +15,12 @@
     <div class="container">
         
         <div class="row"> 
-            @if (sizeof($all_notes) > 0)
-            <a class="btn btn-warning" href="{{ route('new-course') }}" >Nouvelle note</a>
+            @if (sizeof($all_notes) > 0)            
+                @if (session('noteCoureUpdated'))
+                    <div class="col-md-12">
+                        {{ session('noteCourseUpdated') }}
+                    </div>
+                @endif                
                 <table class="table">
                     <thead>
                       <tr>
@@ -30,8 +34,13 @@
                             <tr>
                                 <input type="hidden" name="idNote" value="{{ $note->id }}" />
                                 <td><a href="{{ route('detail-course', ['id' => $note->id]) }}">{{ $note->titre }}</a></td>
-                                <td><median><i class="fa fa-calendar"></i> {{ $note->updated_at ? date('d/m/Y', strtotime($note->updated_at)) : 'Aucune' }} <i class="fa fa-clock-o"></i> 
-                                    <strong>{{ $note->updated_at ? date('H:i', strtotime($note->updated_at)) : ' modification' }}</strong></median></td>
+                                <td><median>                                     
+                                    @if ($note->updated_at)
+                                        <i class="fa fa-calendar"></i>
+                                        <strong>{{ date('d/m/Y', strtotime($note->updated_at)) }} </strong>
+                                        <i class="fa fa-clock-o"></i> 
+                                        <strong>{{ $note->updated_at ? date('H:i', strtotime($note->updated_at)) : ' modification' }}</strong></median></td>
+                                    @endif                                    
                                 <td>
                                   @foreach($partages as $partage)
                                       @if ($partage == $note->id)

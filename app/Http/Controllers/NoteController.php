@@ -120,16 +120,6 @@ class NoteController extends Controller
         $note->etat = 1;
         $note->save();
         
-        $editor = $request->input('example');        
-                
-        DB::table('notes')
-            ->where('id', $idNote)
-            ->update(['contenu' => $editor]);
-        
-        DB::table('notes')
-            ->where('id', $idNote)
-            ->update(['updated_at' => date('Y-m-d H:i:s')]);
-        
         return redirect()->route('all-courses')->with('noteCoureUpdated', 'Note mise à jour avec succès');
     }
     
